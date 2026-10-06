@@ -1,0 +1,6 @@
+.DS_Store
+.research/
+node_modules/
+test-results/
+.env*
+*.log
