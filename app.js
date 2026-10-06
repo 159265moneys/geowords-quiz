@@ -1,6 +1,6 @@
-import {LANGUAGES,QUESTIONS} from './data.js';
-import {recognitionFor} from './recognition.js';
-import {createSession,makeChoices,makeMeaningChoices,answerQuestion,advance,getStats} from './quiz.js';
+import {LANGUAGES,QUESTIONS} from './data.js?v=20261006-3';
+import {recognitionFor} from './recognition.js?v=20261006-3';
+import {createSession,makeChoices,makeMeaningChoices,answerQuestion,advance,getStats} from './quiz.js?v=20261006-3';
 
 const main=document.querySelector('#main');
 const icons={

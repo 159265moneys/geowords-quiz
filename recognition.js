@@ -1,4 +1,4 @@
-import {LANGUAGES} from './data.js';
+import {LANGUAGES} from './data.js?v=20261006-3';
 
 export function recognitionFor(question){
   const {word,language,shared}=question;
