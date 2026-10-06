@@ -146,6 +146,20 @@ const rows = [
  ['vi','nhà thuốc','薬局','店','nh と母音の上の複数の記号が目印。二語に分かれている形で覚えます。','nhà（家・建物）＋ thuốc（薬）。ベトナムの薬局の看板でよく見る組み合わせです。']
 ];
 
+
+rows.push(
+ ['es','ALTO','一時停止','標識','停止標識の ALTO はメキシコ・グアテマラ・コスタリカ・パナマなど。メキシコだけには絞れません。','スペイン語で「止まれ」の表示。alto には「高い」など別の意味もあるので、停止標識という文脈が重要です。',['pt','it','fr','de','nl','da','no','sv','fi','pl','af','tr']],
+ ['pt','PARE','一時停止','標識','ブラジルの停止標識で定番。ただしスペイン語圏の南米でも PARE なので、ブラジル確定ではありません。','parar（止まる）の命令形。ポルトガル語とスペイン語で同じ綴り・同じ意味になる例です。',['es','it','fr','ro','no','da','fi','sq']],
+ ['fr','ARRÊT','停止','標識','停止標識ならカナダ、とくにケベック州が有力。フランス本国の停止標識は通常 STOP です。','arrêter（止める）に関連する名詞。ケベック州以外にも使用例があり、州まで100%確定とはいえません。'],
+ ['it','divieto','禁止','標識','イタリアの禁止標識・注意書きで役立ちます。DIVIETO DI SOSTA は駐車禁止。','vietare（禁じる）に関連する語。divieto di accesso は立入・進入禁止の表示です。'],
+ ['de','Einbahnstraße','一方通行','標識','ß と長い複合語がドイツ語の手がかり。スイスでは Einbahnstrasse と書きます。','ein（一つ）＋ Bahn（進路）＋ Straße（道）からなる「一方通行」の語。ドイツ語圏の複数国で使われます。'],
+ ['nl','fietspad','自転車道','標識','fiets- と -pad を組み合わせた語。オランダ・ベルギー北部の自転車道表示で有用です。','fiets（自転車）＋ pad（道）。一語の意味が分かると、道路脇の案内を読み取りやすくなります。'],
+ ['tr','DUR','一時停止','標識','通常のジオゲの道路カバレッジで、停止標識に DUR ならトルコの非常に強い決め手。','durmak（止まる）の命令形。看板の単語単体ではフランス語 dur（硬い）などもあるので、標識という文脈を含めます。',['fr','ro','no','sv','da','de','nl','sq']],
+ ['ms','BERHENTI','一時停止','標識','通常のジオゲの道路カバレッジで、停止標識に BERHENTI ならマレーシアの非常に強い決め手。','ber- と henti（停止）からなる語。単語自体はインドネシア語にもあり、普通の文章中なら国を断定できません。',['id']],
+ ['ar','قف','一時停止','標識','アラビア語の停止標識で見かける短い語。ヨルダン・UAEなど複数国で使うため国は未確定です。','وقف（立つ・止まる）の命令形 قِفْ。通常の標識では母音記号を省いて قف と書きます。'],
+ ['vi','cấm','禁止','標識','â とその上の声調記号がベトナム語の手がかり。交通・立入禁止などの看板に現れます。','漢字の「禁」に由来する漢越語。cấm hút thuốc は禁煙。後ろの語で何が禁止かが変わります。']
+);
+
 // Conservatively exclude homographs, inflected forms, and alternative romanizations too.
 const OTHER_FORMS = {
   "calle": [
@@ -298,6 +312,11 @@ export const QUESTIONS = rows.map(([language,word,meaning,category,clue,explanat
 }));
 
 const sourceOverrides = {
+ 'ALTO': ['https://en.wiktionary.org/wiki/alto#Spanish','Wiktionary'],
+ 'PARE': ['https://en.wiktionary.org/wiki/pare#Portuguese','Wiktionary'],
+ 'ARRÊT': ['https://en.wiktionary.org/wiki/arr%C3%AAt#French','Wiktionary'],
+ 'DUR': ['https://en.wiktionary.org/wiki/dur#Turkish','Wiktionary'],
+ 'BERHENTI': ['https://en.wiktionary.org/wiki/berhenti#Malay','Wiktionary'],
  'lekáreň': ['https://slovnik.aktuality.sk/pravopis/?q=lek%C3%A1re%C5%88', 'Slovnik.sk'],
  'lekarna': ['https://fran.si/iskanje?Query=lekarna&View=1', 'Fran'],
  'občina': ['https://fran.si/iskanje?Query=ob%C4%8Dina&View=1', 'Fran'],
@@ -308,3 +327,10 @@ for (const q of QUESTIONS) {
  if(override) [q.source,q.sourceLabel]=override;
  else q.sourceLabel='Wiktionary';
 }
+
+const signContexts={
+ ALTO:{countries:'メキシコ／グアテマラ／コスタリカ／パナマなど',guide:'mexico'},
+ PARE:{countries:'ブラジル／南米のスペイン語圏など',guide:'brazil'},
+ 'ARRÊT':{countries:'カナダ、とくにケベック州',guide:'canada'}
+};
+for(const q of QUESTIONS)if(signContexts[q.word])Object.assign(q,signContexts[q.word]);

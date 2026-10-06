@@ -119,3 +119,22 @@
 |98|сургууль|モンゴル語|学校|[Wiktionary](https://en.wiktionary.org/wiki/%D1%81%D1%83%D1%80%D0%B3%D1%83%D1%83%D0%BB%D1%8C#Mongolian)|
 |99|đường|ベトナム語|道・通り|[Wiktionary](https://en.wiktionary.org/wiki/%C4%91%C6%B0%E1%BB%9Dng#Vietnamese)|
 |100|nhà thuốc|ベトナム語|薬局|[Wiktionary](https://en.wiktionary.org/wiki/nh%C3%A0%20thu%E1%BB%91c#Vietnamese)|
+|101|ALTO|スペイン語|一時停止|[Wiktionary](https://en.wiktionary.org/wiki/alto#Spanish)|
+|102|PARE|ポルトガル語|一時停止|[Wiktionary](https://en.wiktionary.org/wiki/pare#Portuguese)|
+|103|ARRÊT|フランス語|停止|[Wiktionary](https://en.wiktionary.org/wiki/arr%C3%AAt#French)|
+|104|divieto|イタリア語|禁止|[Wiktionary](https://en.wiktionary.org/wiki/divieto#Italian)|
+|105|Einbahnstraße|ドイツ語|一方通行|[Wiktionary](https://en.wiktionary.org/wiki/Einbahnstra%C3%9Fe#German)|
+|106|fietspad|オランダ語|自転車道|[Wiktionary](https://en.wiktionary.org/wiki/fietspad#Dutch)|
+|107|DUR|トルコ語|一時停止|[Wiktionary](https://en.wiktionary.org/wiki/dur#Turkish)|
+|108|BERHENTI|マレー語|一時停止|[Wiktionary](https://en.wiktionary.org/wiki/berhenti#Malay)|
+|109|قف|アラビア語|一時停止|[Wiktionary](https://en.wiktionary.org/wiki/%D9%82%D9%81#Arabic)|
+|110|cấm|ベトナム語|禁止|[Wiktionary](https://en.wiktionary.org/wiki/c%E1%BA%A5m#Vietnamese)|
+
+## 停止標識の地域判定
+
+- [トルコの DUR](https://www.plonkit.net/turkey)
+- [マレーシアの BERHENTI](https://www.plonkit.net/malaysia)
+- [カナダの ARRÊT と州の例外](https://www.plonkit.net/canada)
+- [メキシコ・近隣国の ALTO と南米の PARE](https://www.plonkit.net/mexico)
+
+停止標識として現れた場合の手がかりと、単語単体の言語判定は区別しています。

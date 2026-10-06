@@ -1,15 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {QUESTIONS,LANGUAGES} from '../data.js';
-import {makeChoices,createSession,answerQuestion,advance,getStats} from '../quiz.js';
+import {makeChoices,makeMeaningChoices,createSession,answerQuestion,advance,getStats} from '../quiz.js';
+import {recognitionFor} from '../recognition.js';
 
 function rng(seed=714){return ()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};}
 
-test('100 distinct questions with complete explanations across 40 languages',()=>{
-  assert.equal(QUESTIONS.length,100);
+test('110 distinct questions with complete explanations across 40 languages',()=>{
+  assert.equal(QUESTIONS.length,110);
   assert.equal(Object.keys(LANGUAGES).length,40);
-  assert.equal(new Set(QUESTIONS.map(q=>q.id)).size,100);
-  assert.equal(new Set(QUESTIONS.map(q=>q.word)).size,100);
+  assert.equal(new Set(QUESTIONS.map(q=>q.id)).size,110);
+  assert.equal(new Set(QUESTIONS.map(q=>q.word)).size,110);
   for(const q of QUESTIONS){
     assert.ok(LANGUAGES[q.language]);
     for(const field of ['word','meaning','clue','explanation','source'])assert.ok(q[field]?.trim(),`${q.id}: ${field}`);
@@ -30,10 +31,10 @@ test('every question has one correct choice and no shared-language distractors',
   }
 });
 
-test('all 100 questions are reachable once; duplicate answers and premature advance are ignored',()=>{
-  const session=createSession(100,QUESTIONS,rng());
+test('all 110 questions are reachable once; duplicate answers and premature advance are ignored',()=>{
+  const session=createSession(110,QUESTIONS,rng());
   const visited=new Set();
-  for(let i=0;i<100;i++){
+  for(let i=0;i<110;i++){
     const q=session.deck[session.index];
     visited.add(q.id);
     session.choices=makeChoices(q,rng(i+1));
@@ -43,9 +44,9 @@ test('all 100 questions are reachable once; duplicate answers and premature adva
     assert.equal(answerQuestion(session,q.language),false);
     assert.equal(advance(session),true);
   }
-  assert.equal(visited.size,100);
+  assert.equal(visited.size,110);
   assert.equal(session.done,true);
-  assert.deepEqual(getStats(session),{correct:100,streak:100,answered:100,total:100});
+  assert.deepEqual(getStats(session),{correct:110,streak:110,answered:110,total:110});
   assert.equal(advance(session),false);
   assert.equal(answerQuestion(session,session.choices[0]),false);
 });
@@ -66,4 +67,38 @@ test('mixed answers reset streaks; review contains only missed words and ends no
   for(const q of review.deck){review.choices=makeChoices(q);answerQuestion(review,q.language);advance(review);}
   assert.equal(review.done,true);
   assert.equal(getStats(review).correct,5);
+});
+
+test('meaning mode has unambiguous options, scores every word, and supports review',()=>{
+  const random=rng();
+  const session=createSession(QUESTIONS.length,QUESTIONS,random,'meaning');
+  for(const q of session.deck){
+    const options=makeMeaningChoices(q,random);
+    assert.equal(new Set(options).size,4);
+    assert.equal(options.filter(o=>o===q.meaning).length,1);
+    if(/通り|道路|一方通行|自転車道/.test(q.meaning))assert.ok(!options.filter(o=>o!==q.meaning).includes('通り・道路'));
+    if(/店|食堂|薬局|パン屋|精肉店|食料品|両替所/.test(q.meaning))assert.ok(!options.filter(o=>o!==q.meaning).includes('店'));
+    if(/停止/.test(q.meaning))assert.ok(!options.filter(o=>o!==q.meaning).includes('一時停止'));
+    session.choices=options;
+    assert.equal(answerQuestion(session,q.meaning),true);
+    assert.equal(answerQuestion(session,q.meaning),false);
+    advance(session);
+  }
+  assert.equal(session.done,true);
+  assert.equal(getStats(session).correct,QUESTIONS.length);
+  const review=createSession(1,[QUESTIONS[0]],random,'meaning');
+  assert.equal(review.mode,'meaning');
+  review.choices=makeMeaningChoices(review.deck[0]);
+  answerQuestion(review,review.choices.find(c=>c!==review.deck[0].meaning));
+  assert.equal(getStats(review).correct,0);
+});
+
+test('every answer explains identification strength; stop-sign certainty stays conditional',()=>{
+  for(const q of QUESTIONS){const r=recognitionFor(q);assert.ok(r.label&&r.text&&r.tone);}
+  for(const word of ['DUR','BERHENTI']){
+    const r=recognitionFor(QUESTIONS.find(q=>q.word===word));
+    assert.match(r.label,/標識なら/);
+    assert.match(r.text,/前提/);
+  }
+  assert.equal(recognitionFor(QUESTIONS.find(q=>q.word==='PARE')).tone,'shared');
 });
