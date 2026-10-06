@@ -44,7 +44,7 @@ function feedback(question,answer){
 }
 
 function render(){
-  if(session.done){renderResults();return;}
+  if(session.done){document.querySelector('.feedback-announcement').textContent='クイズ完了';renderResults();return;}
   const question=session.deck[session.index];
   const answer=session.answers[session.index];
   const stats=getStats(session);
@@ -53,7 +53,8 @@ function render(){
     const correct=!!answer&&key===question.language;
     const wrong=!!answer&&key===answer.selected&&!answer.correct;
     return `<button class="choice ${correct?'choice-correct':''} ${wrong?'choice-wrong':''} ${answer&&!correct&&!wrong?'choice-muted':''}" data-language="${key}" ${answer?'disabled':''}><span class="choice-key">${index+1}</span><span class="choice-name">${LANGUAGES[key].name}</span><span class="choice-status">${correct?`${icon('check')}<span>正解</span>`:wrong?`${icon('cross')}<span>選択</span>`:icon('arrow')}</span></button>`;
-  }).join('')}</div><div class="live-stats"><span><span class="stat-label">正解</span><strong>${stats.correct}</strong><span class="stat-denominator">/ ${stats.answered}</span></span><span><span class="stat-label">連続</span><strong>${stats.streak}</strong><span class="streak-sparks" aria-hidden="true">${stats.streak>0?'✦':''}</span></span></div></section></div><div class="feedback-announcement sr-only" role="status" aria-live="polite">${answer?`${answer.correct?'正解です。':'不正解です。正解は'}${LANGUAGES[question.language].name}。${escape(question.meaning)}`:''}</div>${answer?feedback(question,answer):'<div class="keyboard-hint"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><span>で選択</span></div>'}`;
+  }).join('')}</div><div class="live-stats"><span><span class="stat-label">正解</span><strong>${stats.correct}</strong><span class="stat-denominator">/ ${stats.answered}</span></span><span><span class="stat-label">連続</span><strong>${stats.streak}</strong><span class="streak-sparks" aria-hidden="true">${stats.streak>0?'✦':''}</span></span></div></section></div>${answer?feedback(question,answer):'<div class="keyboard-hint"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><span>で選択</span></div>'}`;
+  document.querySelector('.feedback-announcement').textContent=answer?`${answer.correct?'正解です。':'不正解です。正解は'}${LANGUAGES[question.language].name}。${question.meaning}`:'';
   bind();
 }
 
@@ -95,7 +96,7 @@ document.addEventListener('keydown',event=>{
   if(event.repeat||event.altKey||event.ctrlKey||event.metaKey||['SELECT','INPUT','TEXTAREA'].includes(event.target.tagName))return;
   if(session.done)return;
   if(/^[1-4]$/.test(event.key)&&session.answers.length===session.index){event.preventDefault();choose(session.choices[Number(event.key)-1]);}
-  else if(event.key==='Enter'&&session.answers.length>session.index&&!['A','SUMMARY'].includes(event.target.tagName)){event.preventDefault();next();}
+  else if(event.key==='Enter'&&session.answers.length>session.index&&!['A','SUMMARY'].includes(event.target.tagName)&&(event.target.tagName!=='BUTTON'||event.target.id==='next')){event.preventDefault();next();}
 });
 
 start();
