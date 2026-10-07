@@ -1,7 +1,9 @@
+import {EXTRA_COUNTRIES,EXTRA_CASES} from './country-cases.js?v=20261007-5';
 // Practical combinations for ordinary public-road GeoGuessr coverage.
 // Plate observations concern several ordinary passenger cars, not a lone visitor.
 // These are editorial decision rules, not measured probabilities or universal proofs.
 export const COUNTRIES={
+  ...EXTRA_COUNTRIES,
   nl:{name:'オランダ',native:'Netherlands'},lu:{name:'ルクセンブルク',native:'Luxembourg'},
   be:{name:'ベルギー',native:'Belgium'},it:{name:'イタリア',native:'Italy'},pt:{name:'ポルトガル',native:'Portugal'},
   gb:{name:'イギリス',native:'United Kingdom'},ie:{name:'アイルランド',native:'Ireland'},cy:{name:'キプロス',native:'Cyprus'},
@@ -20,7 +22,7 @@ const text=(label,value,detail='')=>({kind:'text',label,value,detail});
 const sign=(value,shape='octagon')=>({kind:'sign',label:'停止標識',value,shape});
 const source=(slug,title)=>({title:title||'Plonk It',url:`https://www.plonkit.net/${slug}`});
 
-export const COUNTRY_QUESTIONS=[
+export const BASE_COUNTRY_QUESTIONS=[
   {id:'country-001',country:'nl',title:'黄色い前後＋straat',scope:'ヨーロッパ',distractors:['lu','be','gb'],
     clues:[plates({background:'yellow',left:'blue'},{background:'yellow',left:'blue'}),drive('right'),text('街路名','…straat','オランダ語の道路表示')],
     rule:['前後とも黄色','道路名がオランダ語'],
@@ -58,13 +60,13 @@ export const COUNTRY_QUESTIONS=[
     compare:[['ie','左側通行でも前後白。'],['cy','古い車は前白・後黄だが、ギリシャ語の案内とキロメートルを使う。']],
     note:'前白・後黄＋左側通行だけを、世界共通の英国確定ルールにはしません。',sources:[source('united-kingdom'),source('cyprus'),{title:'英国政府・ナンバー',url:'https://www.gov.uk/displaying-number-plates/rules-number-plates'},{title:'英国政府・道路標識',url:'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/330323/ltn-1-94_design-directional-signs.pdf'}]},
   {id:'country-007',country:'ie',title:'左＋白い前後＋黄色い警戒標識',scope:'ヨーロッパ',distractors:['gb','mt','cy'],
-    clues:[plates({left:'blue'},{left:'blue'}),drive('left'),{kind:'warning',label:'警戒標識',value:'黄色いひし形'},text('道路案内','英語＋アイルランド語','アイルランド語側が斜体')],
+    clues:[plates({left:'blue'},{left:'blue'}),drive('left'),{kind:'warning',label:'警戒標識',value:'黄色いひし形'},text('道路案内','An Lár / City Centre','英語＋アイルランド語。アイルランド語側が斜体')],
     rule:['左側通行','前後白','黄色いひし形の警戒標識'],
     explanation:'ヨーロッパで黄色いひし形の警戒標識が強い決め手。イギリスと似た景観でも、後ろの白ナンバーと二言語の道路案内で分けられます。',
     compare:[['gb','一般車の後ろは黄色。警戒標識は通常、赤枠の三角形。']],
     note:'オーストラリアなどにも黄色いひし形があります。欧州という範囲を含めて使います。',sources:[source('ireland'),source('united-kingdom')]},
   {id:'country-008',country:'cy',title:'ギリシャ文字＋左側通行',scope:'ヨーロッパ',distractors:['gr','mt','gb'],
-    clues:[drive('left'),text('公的な道路案内','ギリシャ文字＋英語','Δ・Λ・Ω など')],
+    clues:[drive('left'),text('公的な道路案内','ΑΓΡΟΣ / Agros','ギリシャ文字と英語の併記')],
     rule:['ギリシャ文字の道路案内','左側通行'],
     explanation:'ギリシャ文字まで読めたら、左右の通行方向を確認。ギリシャは右、キプロスは左です。',
     compare:[['gr','文字は同じでも右側通行。'],['gb','前白・後黄のナンバーは共通することがあるが、ギリシャ文字の道路案内ではない。']],
@@ -115,3 +117,11 @@ export const COUNTRY_QUESTIONS=[
     compare:[['in','タミル文字はインドにもあるが、シンハラ文字と混同しない。'],['gb','前後の色と左側通行は似るが、公的な看板の文字が異なる。']],
     note:'タミル文字だけではスリランカとインドを分けられません。',sources:[source('sri-lanka')]}
 ];
+
+export const COUNTRY_QUESTIONS=[...BASE_COUNTRY_QUESTIONS,...EXTRA_CASES.filter(c=>c.quiz).map(c=>({
+  id:c.id,country:c.country,title:c.title,scope:c.area,distractors:c.distractors,
+  clues:[...c.observations.map((value,i)=>({kind:'observation',label:`観察 ${i+1}`,value})),
+    ...(c.photos.length?[{kind:'photo',label:'参考写真',photos:c.photos}]:[])],
+  rule:c.observations,explanation:c.summary,compare:c.compare,note:c.note,sources:c.sources,next:c.next,
+  steps:c.steps
+}))];

@@ -4,28 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#143931">
-  <meta name="description" content="ジオゲで何を見て、どこまで絞り、次にどこへ動くか。移動あり向けの7つの観察手順と38の模範解答。">
+  <meta name="description" content="ジオゲで何を見て、どこまで絞り、次にどこへ動くか。移動あり向けの7つの観察手順と200の模範解答。">
   <title>GeoWords — 国までたどる模範解答集</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=20261007-4">
-  <link rel="stylesheet" href="./guide.css?v=20261007-4">
-  <link rel="stylesheet" href="./photos.css?v=20261007-4">
+  <link rel="stylesheet" href="./styles.css?v=20261007-5">
+  <link rel="stylesheet" href="./guide.css?v=20261007-5">
+  <link rel="stylesheet" href="./photos.css?v=20261007-5">
 </head>
 <body class="guide-page">
   <a class="skip-link" href="#flow">判断フローへ</a>
   <div class="guide-shell">
     <header class="guide-header"><a class="brand" href="./" aria-label="GeoWords ホーム"><img src="./favicon.svg" width="36" height="36" alt=""><span>Geo<span class="brand-light">Words</span><small>国までたどる模範解答集</small></span></a><nav aria-label="ページ内ナビゲーション"><a href="#flow">判断フロー</a><a href="#routes">模範解答</a><a href="./quiz.html">練習クイズ ↗</a></nav></header>
-    <section class="guide-hero"><div><div class="guide-kicker"><span></span> FIELD DECISION GUIDE <b>移動あり</b></div><h1>見えたものから、<br><em>国までたどる。</em></h1><div class="hero-sequence"><span>観察</span><i>→</i><span>その辺</span><i>→</i><span>追加の決め手</span><i>→</i><strong>国を選ぶ</strong></div></div><div class="hero-card"><span>先に覚える基準</span><strong>国まで届く条件を<br>セットで覚える。</strong><div><b class="legend-finish">国まで</b><b class="legend-region">その辺</b><b class="legend-skip">保留</b></div><a href="#routes"><span id="total-routes">38</span> の模範ルートを見る <span>↗</span></a></div></section>
+    <section class="guide-hero"><div><div class="guide-kicker"><span></span> FIELD DECISION GUIDE <b>移動あり</b></div><h1>見えたものから、<br><em>国までたどる。</em></h1><div class="hero-sequence"><span>観察</span><i>→</i><span>その辺</span><i>→</i><span>追加の決め手</span><i>→</i><strong>国を選ぶ</strong></div></div><div class="hero-card"><span>先に覚える基準</span><strong>国まで届く条件を<br>セットで覚える。</strong><div><b class="legend-finish">国まで</b><b class="legend-region">その辺</b><b class="legend-skip">保留</b></div><a href="#routes"><span id="total-routes">200</span> の模範ルートを見る <span>↗</span></a></div></section>
     <main>
-      <section id="flow" class="flow-section" aria-label="7つの観察手順"><div class="section-heading"><span class="section-tag">01 / OBSERVATION</span><p>強い決め手が見えたら、途中で国へ。</p></div><div class="flow-layout"><nav id="step-nav" class="step-nav" aria-label="観察する場所"></nav><div id="step-content"></div></div></section>
-      <section id="routes" class="routes-section"><div class="catalog-heading"><div><span class="section-tag">02 / WORKED ROUTES</span><h2>模範解答をたどる</h2></div><span class="catalog-count"><b id="route-count">38</b> ROUTES</span></div><div class="catalog-controls"><label class="search-wrap"><span class="sr-only">国名・特徴で模範解答を検索</span><input id="guide-search" type="search" placeholder="国・黄色・電柱・左側通行…" autocomplete="off"></label><div class="route-filters" role="group" aria-label="絞り込める範囲"><button data-filter="all" aria-pressed="true">すべて</button><button data-filter="finish" aria-pressed="false">国まで</button><button data-filter="region" aria-pressed="false">その辺で止める</button></div></div><div id="route-grid" class="route-grid" aria-live="polite"></div></section>
+      <section id="flow" class="flow-section" aria-label="7つの観察手順"><div class="section-heading"><span class="section-tag">01 / OBSERVATION</span><p><b id="total-cards">205</b> カード · 7つの観察項目</p></div><div class="flow-layout"><nav id="step-nav" class="step-nav" aria-label="観察する場所"></nav><div id="step-content"></div></div></section>
+      <section id="routes" class="routes-section"><div class="catalog-heading"><div><span class="section-tag">02 / WORKED ROUTES</span><h2>模範解答をたどる</h2></div><span class="catalog-count"><b id="route-count">200</b> ROUTES</span></div><div class="catalog-controls"><label class="search-wrap"><span class="sr-only">国名・特徴で模範解答を検索</span><input id="guide-search" type="search" placeholder="国・黄色・電柱・左側通行…" autocomplete="off"></label><div class="route-filters" role="group" aria-label="絞り込める範囲"><button data-filter="all" aria-pressed="true">すべて</button><button data-filter="finish" aria-pressed="false">国まで</button><button data-filter="region" aria-pressed="false">その辺で止める</button></div></div><div class="catalog-selects"><label><span>地域</span><select id="area-filter" aria-label="模範解答を地域で絞る"></select></label><label><span>観察項目</span><select id="stage-filter" aria-label="模範解答を観察項目で絞る"></select></label></div><div id="route-grid" class="route-grid" aria-live="polite"></div><nav id="route-pager" class="route-pager" aria-label="模範解答のページ"></nav></section>
       <section id="stuck" class="stuck-section"><span class="section-tag">03 / NEXT MOVE</span><h2>決め手が見えないとき</h2><div id="fallback-grid" class="fallback-grid"></div><div class="map-finish"><span>国の次</span><strong>地名＋路線番号＋方角</strong><span>交差点・道路形状を地図と照合</span></div></section>
-      <section class="practice-link"><div><span class="section-tag">04 / PRACTICE</span><h2>覚えた決め手を試す</h2><span>国の条件セット16問 ／ 40言語・110語</span></div><a href="./quiz.html">練習クイズへ <span>↗</span></a></section>
+      <section class="practice-link"><div><span class="section-tag">04 / PRACTICE</span><h2>覚えた決め手を試す</h2><span>国の条件セット80問 ／ 40言語・110語</span></div><a href="./quiz.html">練習クイズへ <span>↗</span></a></section>
     </main>
     <footer class="guide-footer"><a class="media-credit-link" href="./PHOTO_CREDITS.md" target="_blank" rel="noopener noreferrer">写真・クレジット ↗</a><span>GEOWORDS · FIELD NOTES</span><a href="https://github.com/159265moneys/geowords-quiz/blob/main/SOURCES.md" target="_blank" rel="noopener noreferrer">出典・選定方針 ↗</a></footer>
   </div>
   <dialog id="route-dialog" class="route-dialog" aria-labelledby="dialog-title"></dialog>
   <noscript><p class="noscript">模範解答を開くにはJavaScriptを有効にしてください。</p></noscript>
-  <script type="module" src="./guide.js?v=20261007-4"></script>
+  <script type="module" src="./guide.js?v=20261007-5"></script>
 </body>
 </html>

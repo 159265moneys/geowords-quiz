@@ -1,4 +1,5 @@
-import {COUNTRY_QUESTIONS,COUNTRIES} from './country-data.js?v=20261007-4';
+import {EXTRA_CASES,COUNTRY_PROFILES} from './country-cases.js?v=20261007-5';
+import {BASE_COUNTRY_QUESTIONS,COUNTRY_QUESTIONS,COUNTRIES} from './country-data.js?v=20261007-5';
 
 const link=slug=>`https://www.plonkit.net/${slug}`;
 export const STEPS=[
@@ -100,7 +101,7 @@ const nextMoves={
  jp:'公的な停止標識の逆三角形と「止まれ」を確認する',
  lk:'ナンバーの色だけなら保留。役所・道路案内のシンハラ文字を探す'
 };
-export const ROUTES=COUNTRY_QUESTIONS.map(q=>({id:q.country,country:COUNTRIES[q.country].name,region:q.scope,level:'finish',title:q.title,question:q,steps:traceData[q.country],next:nextMoves[q.country],sources:q.sources}));
+export const ROUTES=BASE_COUNTRY_QUESTIONS.map(q=>({id:q.country,country:COUNTRIES[q.country].name,region:q.scope,level:'finish',title:q.title,question:q,steps:traceData[q.country],next:nextMoves[q.country],sources:q.sources}));
 function add(id,country,region,level,title,steps,next,summary,slugs){ROUTES.push({id,country,region,level,title,steps,next,summary,sources:slugs.map(slug=>({title:'地域の資料',url:link(slug)}))});}
 add('greece','ギリシャ','ヨーロッパ','finish','ギリシャ文字＋右側通行',[['text','公的な道路案内がギリシャ文字','ギリシャ／キプロス'],['road','右側通行','ギリシャを選ぶ']],'通行方向が不明なら走行車か交差点を見る','同じ文字体系でも通行方向で分けられる。停車中の車の向きだけでは判定しない。',['greece','cyprus']);
 add('iceland','アイスランド','北大西洋','finish','火山礫＋白反射板の黄色いボラード',[['landscape','黒い火山礫・樹木の少ない荒野','アイスランドを先に照合'],['road','黄色い細長いボラードに白い反射板','アイスランドへ絞る'],['text','道路表示に Þ を見つける','アイスランドを裏付け']],'近くの道路標識で Þ や道路番号を見る','木がないだけ、黄色い杭だけでは止めない。フェローの小さな木杭とは構造まで比較する。',['iceland','faroe-islands']);
@@ -135,7 +136,7 @@ STEPS.find(s=>s.id==='sign').sources.push({title:'米加の標識',url:link('can
 STEPS.find(s=>s.id==='road').cards.push({title:'タイ語・ラオ語風の文字＋左右通行',level:'region',result:'左 → タイ／右 → ラオス側を照合',next:'停止標識／一般車のプレート色',detail:'丸い文字だけではカンボジアなども残る。現地の案内を何語か見てから通行方向を重ねる。',routes:['thailand','laos','cambodia'],visual:'thai-lao'});
 STEPS.find(s=>s.id==='road').sources.push({title:'タイとラオスの比較',url:link('laos')});
 STEPS.find(s=>s.id==='text').cards.unshift(
-  {title:'학교・약국／ផ្លូវ',level:'finish',result:'ハングル → 韓国／クメール → カンボジア',next:'複数の公的表示と右側通行を確認',detail:'通常の道路カバレッジが対象。丸や曲線の印象だけでなく、文字のまとまりを図で照合する。',routes:['south-korea','cambodia'],visual:'script-compare'},
+  {title:'학교・약국／ផ្លូវ',level:'finish',result:'ハングル → 韓国／クメール → カンボジア',next:'複数の公的表示と右側通行を確認',detail:'通常の道路カバレッジが対象。丸や曲線の印象だけでなく、文字のまとまりを写真で照合する。',routes:['south-korea','cambodia'],visual:'script-compare'},
   {title:'住所の Kabupaten／Kab.＋地名',level:'finish',result:'インドネシア',next:'県名と州名を地図で探す',detail:'役所・学校などの現地の住所として使われる表記を見る。',routes:['indonesia']}
 );
 STEPS.find(s=>s.id==='text').sources.push({title:'韓国',url:link('south-korea')},{title:'カンボジア',url:link('cambodia')},{title:'インドネシア',url:link('indonesia')});
@@ -148,3 +149,22 @@ export const FALLBACKS=[
   {title:'証拠が食い違う',action:'前後の取り違え・商用車・外国語の店・境界を確認',hold:'弱い情報から外し、公的な標識を優先'},
   {title:'先へ進めない・時間切れ',action:'裏付けのある最小の地域で回答する',hold:'国が決まる情報のない場面は、必ず残る'}
 ];
+
+const areaFor=region=>/南部アフリカ/.test(region)?'アフリカ':/南アメリカ|中南米/.test(region)?'南米':/北米|北中米/.test(region)?'北中米':/豪州|オセアニア/.test(region)?'オセアニア':/アジア|マレー語/.test(region)?'アジア':'ヨーロッパ';
+for(const route of ROUTES){
+  const profile=COUNTRY_PROFILES.find(p=>p.name===route.country);
+  route.area=profile?.area||areaFor(route.region);
+  route.stages=[...new Set(route.steps.map(([stage])=>stage))];
+}
+for(const c of EXTRA_CASES){
+  const country=COUNTRIES[c.country].name;
+  ROUTES.push({...c,country,region:c.area,stages:[...new Set(c.steps.map(([stage])=>stage))]});
+  const step=STEPS.find(s=>s.id===c.stage);
+  const partial=['pole','landscape'].includes(c.stage);
+  step.cards.push({title:c.title,level:partial?'region':c.level,
+    result:partial?`${country}を照合 → 追加の決め手へ`:country,
+    next:c.next,detail:c.summary,evidence:c.observations,routes:[c.id],photos:c.photos});
+  for(const source of c.sources){if(!step.sources.some(s=>s.url===source.url))step.sources.push(source);}
+}
+
+ROUTES.sort((a,b)=>Number(b.id.startsWith('case-'))-Number(a.id.startsWith('case-')));

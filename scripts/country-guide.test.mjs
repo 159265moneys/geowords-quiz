@@ -13,9 +13,9 @@ const checkSources=sources=>{
 };
 
 test('country combinations offer four distinct valid countries and complete evidence',()=>{
-  assert.equal(COUNTRY_QUESTIONS.length,16);
-  assert.equal(new Set(COUNTRY_QUESTIONS.map(q=>q.country)).size,16);
-  assert.equal(new Set(COUNTRY_QUESTIONS.map(q=>q.id)).size,16);
+  assert.equal(COUNTRY_QUESTIONS.length,80);
+  assert.equal(new Set(COUNTRY_QUESTIONS.map(q=>q.country)).size,56);
+  assert.equal(new Set(COUNTRY_QUESTIONS.map(q=>q.id)).size,80);
   for(const q of COUNTRY_QUESTIONS){
     const choices=makeCountryChoices(q,random);
     assert.equal(choices.length,4);
@@ -30,11 +30,11 @@ test('country combinations offer four distinct valid countries and complete evid
     for(const clue of q.clues){assert.ok(clue.label);assert.doesNotMatch(renderClue(clue),/undefined|NaN/);}
     for(const render of [renderCountryStage,countryDetails,renderCountryReview])assert.doesNotMatch(render(q),/undefined|NaN/);
   }
-  assert.equal((renderCountryStudy().match(/class="study-card"/g)||[]).length,16);
+  assert.equal((renderCountryStudy().match(/class="study-card"/g)||[]).length,80);
 });
 
 test('country scoring and missed-only review work through an entire round',()=>{
-  const session=createSession(16,COUNTRY_QUESTIONS,random,'country');
+  const session=createSession(80,COUNTRY_QUESTIONS,random,'country');
   for(const [i,q] of session.deck.entries()){
     session.choices=makeCountryChoices(q,random);
     assert.equal(advance(session),false);
@@ -44,19 +44,19 @@ test('country scoring and missed-only review work through an entire round',()=>{
     assert.equal(advance(session),true);
   }
   assert.equal(session.done,true);
-  assert.equal(getStats(session).correct,8);
+  assert.equal(getStats(session).correct,40);
   const missed=session.deck.filter((q,i)=>!session.answers[i].correct);
   const review=createSession(missed.length,missed,random,'country');
-  assert.equal(review.deck.length,8);
+  assert.equal(review.deck.length,40);
   for(const q of review.deck){review.choices=makeCountryChoices(q);answerQuestion(review,q.country);advance(review);}
   assert.equal(review.done,true);
-  assert.equal(getStats(review).correct,8);
+  assert.equal(getStats(review).correct,40);
 });
 
 test('seven observation stages link to complete worked routes with next moves',()=>{
   assert.deepEqual(STEPS.map(s=>s.id),['sun','landscape','road','pole','sign','plate','text']);
-  assert.equal(ROUTES.length,38);
-  assert.equal(new Set(ROUTES.map(r=>r.id)).size,38);
+  assert.equal(ROUTES.length,200);
+  assert.equal(new Set(ROUTES.map(r=>r.id)).size,200);
   const stageIds=new Set(STEPS.map(s=>s.id));
   const routeIds=new Set(ROUTES.map(r=>r.id));
   for(const step of STEPS){
@@ -92,17 +92,18 @@ test('ambiguous shared clues retain the right stopping points and concrete movem
 });
 
 test('home and quiz remain distinct entry points with consistent module versions',async()=>{
-  const files=['index.html','quiz.html','guide.js','guide-data.js','app.js','country-ui.js','quiz.js','courses.js','recognition.js','photo-view.js'];
+  const files=['index.html','quiz.html','guide.js','guide-data.js','app.js','country-ui.js','quiz.js','courses.js','recognition.js','photo-view.js','country-data.js'];
   for(const name of files){
     const text=await readFile(new URL(`../${name}`,import.meta.url),'utf8');
     const versions=[...text.matchAll(/\?v=([\d-]+)/g)].map(m=>m[1]);
     assert.ok(versions.length);
-    assert.ok(versions.every(v=>v==='20261007-4'),name);
+    assert.ok(versions.every(v=>v==='20261007-5'),name);
   }
   const home=await readFile(new URL('../index.html',import.meta.url),'utf8');
   assert.match(home,/src="\.\/guide\.js/);
   assert.match(home,/href="\.\/quiz\.html"/);
   const quiz=await readFile(new URL('../quiz.html',import.meta.url),'utf8');
+  assert.match(quiz,/id="country-total">80<\/span>/);
   assert.match(quiz,/src="\.\/app\.js/);
   assert.match(quiz,/aria-label="模範解答集へ"/);
 });

@@ -1,22 +1,22 @@
-import {PHOTOS,PLATE_PHOTOS} from './photo-data.js?v=20261007-4';
+import {PHOTOS,PLATE_PHOTOS} from './photo-data.js?v=20261007-5';
 
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const badge=p=>p.kind==='generated'?'生成参考':p.mosaic?'実写・モザイク':'実写';
 
-export function photoFigure(id,label){
+export function photoFigure(id,label,options={}){
   const p=PHOTOS[id];
   if(!p)return '';
   const caption=label||p.label;
-  return `<figure class="field-photo ${p.plate?'plate-photo':''}" data-photo-id="${escape(id)}"><button type="button" class="photo-open" data-photo="${escape(id)}" data-caption="${escape(caption)}" aria-label="${escape(caption)}を拡大"><img src="./${escape(p.src)}" alt="${escape(caption)}" width="${p.width}" height="${p.height}" loading="lazy" decoding="async"><span class="photo-zoom" aria-hidden="true">⤢</span></button><figcaption><span>${escape(caption)}</span><span class="photo-kind ${p.kind==='generated'?'is-generated':''}">${badge(p)}</span></figcaption></figure>`;
+  return `<figure class="field-photo ${p.plate?'plate-photo':''}" data-photo-id="${escape(id)}"><button type="button" class="photo-open" data-photo="${escape(id)}" data-caption="${escape(caption)}" data-photo-quiz="${options.quiz?'true':'false'}" aria-label="${escape(caption)}を拡大"><img src="./${escape(p.src)}" alt="${escape(caption)}" width="${p.width}" height="${p.height}" loading="lazy" decoding="async"><span class="photo-zoom" aria-hidden="true">⤢</span></button><figcaption><span>${escape(caption)}</span><span class="photo-kind ${p.kind==='generated'?'is-generated':''}">${badge(p)}</span></figcaption></figure>`;
 }
 
-export function renderPhotoSet(items,extraClass=''){
+export function renderPhotoSet(items,extraClass='',options={}){
   if(!items?.length)return '';
-  return `<div class="photo-set ${escape(extraClass)}">${items.map(item=>Array.isArray(item)?photoFigure(...item):photoFigure(item)).join('')}</div>`;
+  return `<div class="photo-set ${escape(extraClass)}">${items.map(item=>Array.isArray(item)?photoFigure(item[0],item[1],options):photoFigure(item,undefined,options)).join('')}</div>`;
 }
 
-export function renderPlatePhotos(country){
-  return renderPhotoSet(PLATE_PHOTOS[country],`plate-set ${country==='it'?'italian-pair':''}`);
+export function renderPlatePhotos(country,options={}){
+  return renderPhotoSet(PLATE_PHOTOS[country],`plate-set ${country==='it'?'italian-pair':''}`,options);
 }
 
 function credits(p){
@@ -39,7 +39,7 @@ export function bindPhotoViewer(){
     if(!p)return;
     trigger=button;
     const caption=button.dataset.caption||p.label;
-    dialog.innerHTML=`<div class="photo-dialog-bar"><h2 id="photo-title">${escape(caption)}</h2><button type="button" class="photo-close" aria-label="写真を閉じる">×</button></div><img class="photo-full" src="./${escape(p.src)}" alt="${escape(caption)}" width="${p.width}" height="${p.height}"><div class="photo-dialog-bottom"><span class="photo-kind ${p.kind==='generated'?'is-generated':''}">${badge(p)}</span><details class="photo-credits"><summary>出典・ライセンス</summary><div>${credits(p)}</div></details></div>`;
+    dialog.innerHTML=`<div class="photo-dialog-bar"><h2 id="photo-title">${escape(caption)}</h2><button type="button" class="photo-close" aria-label="写真を閉じる">×</button></div><img class="photo-full" src="./${escape(p.src)}" alt="${escape(caption)}" width="${p.width}" height="${p.height}"><div class="photo-dialog-bottom"><span class="photo-kind ${p.kind==='generated'?'is-generated':''}">${badge(p)}</span>${button.dataset.photoQuiz==='true'?'<span class="photo-source-pending">出典は回答後</span>':`<details class="photo-credits"><summary>出典・ライセンス</summary><div>${credits(p)}</div></details>`}</div>`;
     dialog.querySelector('.photo-close').addEventListener('click',()=>dialog.close());
     dialog.showModal();
   });

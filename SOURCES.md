@@ -159,7 +159,7 @@
 
 ## 移動ありの模範解答集・条件セット（2026-10-07）
 
-38本の模範ルートと43枚の観察カードは、以下の資料に基づく独自の学習用要約です。各カードの「この項目の資料」、各ルートの「適用条件・資料」に具体的なリンクを添えています。写真の出典・作者・ライセンス・加工内容は [PHOTO_CREDITS.md](PHOTO_CREDITS.md) に分けて記録しています。Wikimedia Commons の実写と、特徴を再現した生成参考画像を使用し、画面上で区別しています。
+200本の模範ルートと205枚の観察カードは、以下の資料に基づく独自の学習用要約です。各カードの「この項目の資料」、各ルートの「適用条件・資料」に具体的なリンクを添えています。写真の出典・作者・ライセンス・加工内容は [PHOTO_CREDITS.md](PHOTO_CREDITS.md) に分けて記録しています。Wikimedia Commons の実写と、特徴を再現した生成参考画像を使用し、画面上で区別しています。
 
 ### 観察の順番と保留
 
@@ -199,3 +199,17 @@
 - [ケニア](https://www.plonkit.net/kenya)・[モンゴル](https://www.plonkit.net/mongolia)：シュノーケルを共有する撮影車があるため、通行方向などを足す。
 
 「国まで」は掲載条件がそろった場合の実用的な結論です。外国車の登録国を撮影国と同一視せず、実測の根拠のない正答確率や出題率は表示しません。全カスタムマップ・全撮影地点・国境の精密な判断を保証する教材ではありません。
+
+
+### 追加162ケースの照合資料
+
+54の国・地域それぞれに、道路上の組み合わせ、共通情報から別の証拠へ進むルート、現地住所からのルートを追加しました。うち64ケースを国クイズへ追加し、既存16問と合わせて80問です。単語クイズ110問は維持しています。国別の道路・標識資料は各ルートに記載した Plonk It ガイドです。
+
+- [IANA Root Zone Database](https://www.iana.org/domains/root/db)：54組の国別ドメインを確認。ドメインの登録国をそのまま撮影国とは扱わず、現地施設の所在地と電話番号を合わせます。.co / .la の国外利用にも注意します。
+- [ITU National Numbering Plans](https://www.itu.int/oth/T0202.aspx?parent=T0202)：54組の国番号を確認。+1 は米加などの共用番号として扱い、郵便番号・道路標識で分けます。
+- UPU の国別住所シート44件で郵便番号の桁数・英数字・ハイフン・住所構成を照合。各ルートに該当する資料を添付しています。例：[オランダ](https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/nldEn.pdf)、[ポルトガル](https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/prtEn.pdf)、[ポーランド](https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/polEn.pdf)、[ルーマニア](https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/rouEn.pdf)、[カナダ](https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/canEn.pdf)、[ブラジル](https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/braEn.pdf)。
+- [香港運輸署・規制標識](https://www.td.gov.hk/en/road_safety/road_users_code/index/chapter_8_the_language_of_the_road/signs_giving_orders_/)：GIVE WAY と「讓」の表示。
+- [ペルー中央銀行・Sol](https://investigacion.bcrp.gob.pe/es/investigaciones/revista-moneda/2016-03-01/moneda-165-01)：通貨記号 S/。観光施設の米ドル価格だけでは国を除外しません。
+- [米FHWA・警戒標識](https://mutcd.fhwa.dot.gov/htm/2009/part2/part2c.htm)：NO PASSING ZONE のペナント形。SPEED LIMIT と距離単位を併用。
+
+出題前の表示は `observations` と写真の汎用ラベルから組み立て、言語名や国名を含む推論・解説は別フィールドに保持します。出典情報が答えを明かす写真は、出題中の拡大画面でも解説を出しません。ライセンス一覧は常設のクレジットページにまとめています。

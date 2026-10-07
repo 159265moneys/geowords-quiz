@@ -38,7 +38,8 @@ test('every plate example is mosaicked in the actual published image',()=>{
       assert.ok(PLATE_PHOTOS[q.country]?.length);
       for(const item of PLATE_PHOTOS[q.country])assert.equal(PHOTOS[Array.isArray(item)?item[0]:item].mosaic,true);
     }
-    assert.match(renderCountryStage(q),/<img /,q.country);
+    if(q.clues.some(c=>['plates','photo','sign','warning','crosswalk'].includes(c.kind)))assert.match(renderCountryStage(q),/<img /,q.id);
+    else assert.ok(q.clues.every(c=>['observation','drive','text'].includes(c.kind)),q.id);
     assert.doesNotMatch(renderCountryStage(q),/plate-model|stop-model|warning-model|crosswalk-model|road-model/);
   }
 });
