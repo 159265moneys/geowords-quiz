@@ -102,3 +102,36 @@ test('every answer explains identification strength; stop-sign certainty stays c
   }
   assert.equal(recognitionFor(QUESTIONS.find(q=>q.word==='PARE')).tone,'shared');
 });
+
+test('practical cues distinguish real shared usage from dictionary homographs',()=>{
+  const cue=word=>recognitionFor(QUESTIONS.find(q=>q.word===word));
+  for(const q of QUESTIONS){const r=recognitionFor(q);assert.ok(r.cue&&r.target, q.word);}
+  for(const word of ['rua','rue','vej','vei','tie','katu']){
+    assert.ok(QUESTIONS.find(q=>q.word===word).shared.length);
+    assert.notEqual(cue(word).tone,'shared');
+    assert.match(cue(word).text,/街路名|道路名/);
+  }
+  assert.match(cue('jalan').target,/インドネシア語.*マレー語/);
+  assert.match(cue('PARE').target,/ポルトガル語.*スペイン語/);
+  assert.equal(cue('szkoła').cue,'ł');
+  assert.equal(cue('náměstí').cue,'ě');
+  assert.equal(cue('gatvė').cue,'ė');
+});
+
+test('starter course has 30 useful cues and both courses work in both modes',async()=>{
+  const {COURSES}=await import('../courses.js');
+  assert.equal(COURSES.starter.questions.length,30);
+  assert.equal(new Set(COURSES.starter.questions.map(q=>q.id)).size,30);
+  assert.equal(COURSES.all.questions.length,110);
+  for(const q of COURSES.starter.questions)assert.notEqual(recognitionFor(q).tone,'shared',q.word);
+  for(const course of Object.values(COURSES))for(const mode of ['language','meaning']){
+    const session=createSession(course.questions.length,course.questions,rng(),mode);
+    for(const q of session.deck){
+      session.choices=mode==='meaning'?makeMeaningChoices(q):makeChoices(q);
+      assert.equal(answerQuestion(session,mode==='meaning'?q.meaning:q.language),true);
+      advance(session);
+    }
+    assert.equal(session.done,true);
+    assert.equal(getStats(session).correct,course.questions.length);
+  }
+});

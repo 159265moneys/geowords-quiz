@@ -138,3 +138,20 @@
 - [メキシコ・近隣国の ALTO と南米の PARE](https://www.plonkit.net/mexico)
 
 停止標識として現れた場合の手がかりと、単語単体の言語判定は区別しています。
+
+## 実戦用の読み分け（2026-10-07 改訂）
+
+言語候補と設置国は分け、辞書上の同形語の多さをそのまま実戦の曖昧さに換算しない方針に改めました。解説は目印・候補・次の観察点を優先します。
+
+- [デンマークの街路名 -vej](https://www.plonkit.net/denmark)
+- [フィンランドの -tie / -katu](https://www.plonkit.net/finland)
+- [ポルトガルの Rua とガリシア語 Rúa](https://www.plonkit.net/portugal)
+- [イタリアの Via](https://www.plonkit.net/italy)
+- [チェコ語とスロバキア語の文字の比較](https://www.plonkit.net/czechia)
+- [ポーランド語の ł](https://www.plonkit.net/poland)
+- [リトアニア語の ė](https://www.plonkit.net/lithuania)
+- [ハンガリー語の ő・ű と近隣国の話者](https://www.plonkit.net/hungary)
+- [ルーマニア国内のハンガリー語標識](https://www.plonkit.net/romania)
+- [キプロスのギリシャ語](https://www.plonkit.net/cyprus)
+
+基本30語は編集上の入門セットであり、国判定の確率を測定したものではありません。
