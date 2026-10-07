@@ -1,9 +1,10 @@
-import {LANGUAGES} from './data.js?v=20261007-3';
-import {COUNTRIES,COUNTRY_QUESTIONS} from './country-data.js?v=20261007-3';
-import {renderCountryStage,countryDetails,renderCountryReview,renderCountryStudy} from './country-ui.js?v=20261007-3';
-import {COURSES} from './courses.js?v=20261007-3';
-import {recognitionFor} from './recognition.js?v=20261007-3';
-import {createSession,makeChoices,makeMeaningChoices,makeCountryChoices,answerQuestion,advance,getStats} from './quiz.js?v=20261007-3';
+import {bindPhotoViewer} from './photo-view.js?v=20261007-4';
+import {LANGUAGES} from './data.js?v=20261007-4';
+import {COUNTRIES,COUNTRY_QUESTIONS} from './country-data.js?v=20261007-4';
+import {renderCountryStage,countryDetails,renderCountryReview,renderCountryStudy} from './country-ui.js?v=20261007-4';
+import {COURSES} from './courses.js?v=20261007-4';
+import {recognitionFor} from './recognition.js?v=20261007-4';
+import {createSession,makeChoices,makeMeaningChoices,makeCountryChoices,answerQuestion,advance,getStats} from './quiz.js?v=20261007-4';
 
 const main=document.querySelector('#main');
 const icons={
@@ -111,9 +112,10 @@ function renderResults(){
 
 document.addEventListener('keydown',event=>{
   if(event.repeat||event.altKey||event.ctrlKey||event.metaKey||['SELECT','INPUT','TEXTAREA'].includes(event.target.tagName))return;
-  if(session.done||document.querySelector('#back-to-country'))return;
+  if(session.done||document.querySelector('#back-to-country')||document.querySelector('#photo-dialog[open]'))return;
   if(/^[1-4]$/.test(event.key)&&session.answers.length===session.index){event.preventDefault();choose(session.choices[Number(event.key)-1]);}
   else if(event.key==='Enter'&&session.answers.length>session.index&&!['A','SUMMARY'].includes(event.target.tagName)&&(event.target.tagName!=='BUTTON'||event.target.id==='next')){event.preventDefault();next();}
 });
 
+bindPhotoViewer();
 start();

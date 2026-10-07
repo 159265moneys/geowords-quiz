@@ -1,4 +1,4 @@
-import {COUNTRY_QUESTIONS,COUNTRIES} from './country-data.js?v=20261007-3';
+import {COUNTRY_QUESTIONS,COUNTRIES} from './country-data.js?v=20261007-4';
 
 const link=slug=>`https://www.plonkit.net/${slug}`;
 export const STEPS=[

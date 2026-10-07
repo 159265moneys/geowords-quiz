@@ -92,12 +92,12 @@ test('ambiguous shared clues retain the right stopping points and concrete movem
 });
 
 test('home and quiz remain distinct entry points with consistent module versions',async()=>{
-  const files=['index.html','quiz.html','guide.js','guide-data.js','app.js','country-ui.js','quiz.js','courses.js','recognition.js'];
+  const files=['index.html','quiz.html','guide.js','guide-data.js','app.js','country-ui.js','quiz.js','courses.js','recognition.js','photo-view.js'];
   for(const name of files){
     const text=await readFile(new URL(`../${name}`,import.meta.url),'utf8');
     const versions=[...text.matchAll(/\?v=([\d-]+)/g)].map(m=>m[1]);
     assert.ok(versions.length);
-    assert.ok(versions.every(v=>v==='20261007-3'),name);
+    assert.ok(versions.every(v=>v==='20261007-4'),name);
   }
   const home=await readFile(new URL('../index.html',import.meta.url),'utf8');
   assert.match(home,/src="\.\/guide\.js/);
