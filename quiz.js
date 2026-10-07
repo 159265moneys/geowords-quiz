@@ -1,4 +1,4 @@
-import {LANGUAGES,QUESTIONS} from './data.js?v=20261007-5';
+import {LANGUAGES,QUESTIONS} from './data.js?v=20261007-6';
 
 export function shuffle(items,random=Math.random){
   const result=[...items];

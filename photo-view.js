@@ -1,4 +1,4 @@
-import {PHOTOS,PLATE_PHOTOS} from './photo-data.js?v=20261007-5';
+import {PHOTOS,PLATE_PHOTOS} from './photo-data.js?v=20261007-6';
 
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const badge=p=>p.kind==='generated'?'生成参考':p.mosaic?'実写・モザイク':'実写';

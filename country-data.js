@@ -1,4 +1,4 @@
-import {EXTRA_COUNTRIES,EXTRA_CASES} from './country-cases.js?v=20261007-5';
+import {EXTRA_COUNTRIES,EXTRA_CASES} from './country-cases.js?v=20261007-6';
 // Practical combinations for ordinary public-road GeoGuessr coverage.
 // Plate observations concern several ordinary passenger cars, not a lone visitor.
 // These are editorial decision rules, not measured probabilities or universal proofs.

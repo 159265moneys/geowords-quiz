@@ -97,7 +97,7 @@ test('home and quiz remain distinct entry points with consistent module versions
     const text=await readFile(new URL(`../${name}`,import.meta.url),'utf8');
     const versions=[...text.matchAll(/\?v=([\d-]+)/g)].map(m=>m[1]);
     assert.ok(versions.length);
-    assert.ok(versions.every(v=>v==='20261007-5'),name);
+    assert.ok(versions.every(v=>v==='20261007-6'),name);
   }
   const home=await readFile(new URL('../index.html',import.meta.url),'utf8');
   assert.match(home,/src="\.\/guide\.js/);

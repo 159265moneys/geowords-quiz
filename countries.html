@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#143931">
+  <meta name="description" content="ジオゲッサー111国・地域の229条件セット。国名・横並びの必須条件・必要数・信頼度を一覧。撮影車の一撃メタ、モザイクのナンバー、標識から国を決める。">
+  <title>GeoWords — 国を決める条件表</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css?v=20261007-6">
+  <link rel="stylesheet" href="./guide.css?v=20261007-6">
+  <link rel="stylesheet" href="./photos.css?v=20261007-6">
+  <link rel="stylesheet" href="./country-table.css?v=20261007-6">
+</head>
+<body class="guide-page table-page">
+  <a class="skip-link" href="#country-table">条件表へ</a>
+  <div class="table-shell">
+    <header class="guide-header"><a class="brand" href="./" aria-label="GeoWords ホーム"><img src="./favicon.svg" width="36" height="36" alt=""><span>Geo<span class="brand-light">Words</span><small>国までたどる模範解答集</small></span></a><nav aria-label="ページナビゲーション"><a href="./countries.html" aria-current="page">国別の条件表</a><a href="./#routes">模範解答</a><a href="./quiz.html">練習クイズ ↗</a></nav></header>
+    <main>
+      <section class="table-hero"><div><div class="guide-kicker"><span></span> COUNTRY CHECKLIST <b>移動あり</b></div><h1>国を決める、<em>条件の表。</em></h1><div class="table-totals"><span><b id="total-countries">111</b> 国・地域</span><span><b id="total-rules">229</b> 条件セット</span><span><b id="total-single">11</b> 一撃</span></div></div><div class="set-key" aria-label="同じ行のすべての条件が必要。別の行とは合算しません"><span class="key-label">同じ行をすべて確認</span><div><span>①</span><i>＋</i><span>②</span><i>＋</i><span>③</span><i>→</i><strong>3 / 3</strong></div><button class="reliability-help" id="help-button" type="button">信頼度・100%の扱い <span>ⓘ</span></button></div></section>
+      <section class="table-catalog" aria-label="国別の条件セット">
+        <div class="table-controls"><label class="table-search"><span class="sr-only">国名・特徴を検索</span><span aria-hidden="true">⌕</span><input id="table-search" type="search" placeholder="国・黒テープ・黄色ナンバー…" autocomplete="off"></label><label class="table-select"><span>地域</span><select id="table-area"><option value="all">すべての地域</option></select></label><label class="table-select"><span>信頼度</span><select id="table-grade"><option value="all">S・A すべて</option><option value="S">S 確定級のみ</option><option value="A">A 非常に強い</option></select></label></div>
+        <div class="table-tabs" role="group" aria-label="見るもの"><button type="button" data-type="all" aria-pressed="true">すべて</button><button type="button" data-type="single" aria-pressed="false">⚡ 一撃</button><button type="button" data-type="car" aria-pressed="false">撮影車</button><button type="button" data-type="plate" aria-pressed="false">ナンバー</button><button type="button" data-type="sign" aria-pressed="false">標識</button><button type="button" data-type="road" aria-pressed="false">道路</button><button type="button" data-type="pole" aria-pressed="false">電柱</button><button type="button" data-type="text" aria-pressed="false">文字・住所</button><button type="button" data-type="address" aria-pressed="false">住所で決着</button></div>
+        <div class="table-toolbar"><span id="table-result" role="status" aria-live="polite"></span><div><span class="scroll-label">横に見る</span><button type="button" id="scroll-left" aria-label="条件表を左にスクロール">←</button><button type="button" id="scroll-right" aria-label="条件表を右にスクロール">→</button><button type="button" id="reset-checks">チェック解除</button></div></div>
+        <div class="table-scroll" id="table-scroll" role="region" aria-label="横にスクロールできる国別の条件表" tabindex="0"><table id="country-table"><caption class="sr-only">国ごとの代替条件セット。同じ行の必須条件をすべて満たすと、その行の信頼度で判定します。</caption><colgroup><col class="col-country"><col class="col-route"><col class="col-condition"><col class="col-condition"><col class="col-condition"><col class="col-progress"></colgroup><thead><tr><th scope="col">国・地域</th><th scope="col">条件セット <small>どれか1行でOK</small></th><th scope="col"><span>①</span> 必須条件</th><th scope="col"><span>②</span> 必須条件</th><th scope="col"><span>③</span> 必須条件</th><th scope="col">必要数・信頼度</th></tr></thead><tbody><tr><td colspan="6" class="table-empty">読み込み中…</td></tr></tbody></table></div>
+        <div id="table-empty" class="table-empty" hidden>該当する条件セットがありません</div>
+        <nav class="table-pager" id="table-pager" aria-label="国別の条件表のページ"></nav>
+        <div class="table-bottom"><span>通常の公道 · 2026.10.07</span><button type="button" id="bottom-help">S 確定級 / A 非常に強い ⓘ</button><a href="https://github.com/159265moneys/geowords-quiz/blob/main/SOURCES.md" target="_blank" rel="noopener noreferrer">出典・選定方針 ↗</a></div>
+      </section>
+    </main>
+    <footer class="guide-footer"><a href="./">模範解答集へ</a><span>GEOWORDS · COUNTRY CHECKLIST</span><a href="./quiz.html">練習クイズ ↗</a></footer>
+  </div>
+  <div class="sr-only" id="check-status" role="status" aria-live="polite" aria-atomic="true"></div>
+  <dialog id="rule-dialog" class="route-dialog table-dialog" aria-labelledby="rule-title"></dialog>
+  <noscript><p class="noscript">条件表を使うにはJavaScriptを有効にしてください。</p></noscript>
+  <script type="module" src="./country-table.js?v=20261007-6"></script>
+</body>
+</html>

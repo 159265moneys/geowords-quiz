@@ -1,5 +1,5 @@
-import {EXTRA_CASES,COUNTRY_PROFILES} from './country-cases.js?v=20261007-5';
-import {BASE_COUNTRY_QUESTIONS,COUNTRY_QUESTIONS,COUNTRIES} from './country-data.js?v=20261007-5';
+import {EXTRA_CASES,COUNTRY_PROFILES} from './country-cases.js?v=20261007-6';
+import {BASE_COUNTRY_QUESTIONS,COUNTRY_QUESTIONS,COUNTRIES} from './country-data.js?v=20261007-6';
 
 const link=slug=>`https://www.plonkit.net/${slug}`;
 export const STEPS=[

@@ -1,4 +1,4 @@
-import {LANGUAGES} from './data.js?v=20261007-5';
+import {LANGUAGES} from './data.js?v=20261007-6';
 
 // These are practical reading cues, not probabilities or claims of worldwide exclusivity.
 // `question.shared` also contains rare inflections and romanizations: it protects

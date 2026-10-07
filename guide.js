@@ -1,8 +1,8 @@
-import {renderPhotoSet,renderPlatePhotos,bindPhotoViewer} from './photo-view.js?v=20261007-5';
-import {VISUAL_PHOTOS,ROUTE_PHOTOS} from './photo-data.js?v=20261007-5';
-import {STEPS,ROUTES,FALLBACKS} from './guide-data.js?v=20261007-5';
-import {COUNTRIES} from './country-data.js?v=20261007-5';
-import {renderCountryStage} from './country-ui.js?v=20261007-5';
+import {renderPhotoSet,renderPlatePhotos,bindPhotoViewer} from './photo-view.js?v=20261007-6';
+import {VISUAL_PHOTOS,ROUTE_PHOTOS} from './photo-data.js?v=20261007-6';
+import {STEPS,ROUTES,FALLBACKS} from './guide-data.js?v=20261007-6';
+import {COUNTRIES} from './country-data.js?v=20261007-6';
+import {renderCountryStage} from './country-ui.js?v=20261007-6';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const icons={sun:'<circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/>',mountain:'<path d="m2 20 7-14 5 8 3-5 5 11H2Zm4-8 3 2 2-3"/>',road:'<path d="M6 2 2 22M18 2l4 20M12 3v4m0 3v4m0 3v4"/>',pole:'<path d="M12 22V3M3 6h18M6 3v6m12-6v6M4 13h16"/>',sign:'<path d="M12 2v20M3 5h14l4 4-4 4H3V5Z"/>',plate:'<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 6v12m3-6h2m3 0h2m2 0h1"/>',text:'<path d="M4 4h16M12 4v16M8 20h8"/>',arrow:'<path d="m9 5 7 7-7 7"/>',check:'<path d="m5 12 4 4L19 6"/>'};
 const icon=name=>`<svg viewBox="0 0 24 24" class="icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]||icons.arrow}</svg>`;

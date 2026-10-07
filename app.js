@@ -1,10 +1,10 @@
-import {bindPhotoViewer} from './photo-view.js?v=20261007-5';
-import {LANGUAGES} from './data.js?v=20261007-5';
-import {COUNTRIES,COUNTRY_QUESTIONS} from './country-data.js?v=20261007-5';
-import {renderCountryStage,countryDetails,renderCountryReview,renderCountryStudy} from './country-ui.js?v=20261007-5';
-import {COURSES} from './courses.js?v=20261007-5';
-import {recognitionFor} from './recognition.js?v=20261007-5';
-import {createSession,makeChoices,makeMeaningChoices,makeCountryChoices,answerQuestion,advance,getStats} from './quiz.js?v=20261007-5';
+import {bindPhotoViewer} from './photo-view.js?v=20261007-6';
+import {LANGUAGES} from './data.js?v=20261007-6';
+import {COUNTRIES,COUNTRY_QUESTIONS} from './country-data.js?v=20261007-6';
+import {renderCountryStage,countryDetails,renderCountryReview,renderCountryStudy} from './country-ui.js?v=20261007-6';
+import {COURSES} from './courses.js?v=20261007-6';
+import {recognitionFor} from './recognition.js?v=20261007-6';
+import {createSession,makeChoices,makeMeaningChoices,makeCountryChoices,answerQuestion,advance,getStats} from './quiz.js?v=20261007-6';
 
 const main=document.querySelector('#main');
 const icons={

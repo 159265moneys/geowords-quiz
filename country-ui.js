@@ -1,5 +1,5 @@
-import {renderPhotoSet,renderPlatePhotos} from './photo-view.js?v=20261007-5';
-import {COUNTRIES,COUNTRY_QUESTIONS} from './country-data.js?v=20261007-5';
+import {renderPhotoSet,renderPlatePhotos} from './photo-view.js?v=20261007-6';
+import {COUNTRIES,COUNTRY_QUESTIONS} from './country-data.js?v=20261007-6';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const colors={white:'白',yellow:'黄',black:'黒',red:'赤'};
 
