@@ -1,6 +1,6 @@
 # 教材の出典と編集方針
 
-確認日: 2026-10-06
+確認日: 2026-10-07（語彙の初版は2026-10-06）
 
 日本語の解説は、辞書・言語資料・地理ゲームの学習資料を参考に独自に短くまとめています。辞書の定義・長文・例文の転載ではありません。語源は確実に説明できる範囲にとどめ、語構成や現在の用法と区別しています。
 
@@ -155,3 +155,47 @@
 - [キプロスのギリシャ語](https://www.plonkit.net/cyprus)
 
 基本30語は編集上の入門セットであり、国判定の確率を測定したものではありません。
+
+
+## 移動ありの模範解答集・条件セット（2026-10-07）
+
+38本の模範ルートと43枚の観察カードは、以下の資料に基づく独自の学習用要約です。各カードの「この項目の資料」、各ルートの「適用条件・資料」に具体的なリンクを添えています。図は自作の模式図で、資料の写真を転載したものではありません。
+
+### 観察の順番と保留
+
+- [NOAA・太陽位置の計算](https://gml.noaa.gov/grad/solcalc/solareqns.PDF)：太陽の方位は緯度・季節・時刻に依存。熱帯や低い太陽で半球を断定しない。
+- [Plonk It・初心者向けガイド](https://www.plonkit.net/beginners-guide)：複数種類の道路情報、通行方向、文字などの観察。
+- [南アフリカ](https://www.plonkit.net/south-africa)・[レソト](https://www.plonkit.net/lesotho)：黄色い外側線と白い中央線は周辺国にも共通。地形だけでは国境の両側を分けない。
+- [アイスランド](https://www.plonkit.net/iceland)・[フェロー諸島](https://www.plonkit.net/faroe-islands)：荒野だけでは止めず、ボラードの構造・反射板・現地文字まで照合。
+- [ルーマニア](https://www.plonkit.net/romania)・[台湾](https://www.plonkit.net/taiwan)・[スリランカ](https://www.plonkit.net/sri-lanka)：電柱の大きな黄色タグ、根元までの斜線、下部の大きな穴を補助にし、言語と通行方向で締める。
+
+### ナンバー・通行方向・公的表示
+
+- [オランダ](https://www.plonkit.net/netherlands)・[ルクセンブルク](https://www.plonkit.net/luxembourg)：前後黄色の共有と街路名、ルクセンブルクの枠付き黄色い方向標識。
+- [ベルギー](https://www.plonkit.net/belgium)：白地に赤い文字。赤背景や縁取りと区別。
+- [イタリア](https://www.plonkit.net/italy)・[フランス](https://www.plonkit.net/france)・[アルバニア](https://www.plonkit.net/albania)：両端青を共有。前の長さ、右帯、街路語を比較。
+- [ポルトガル](https://www.plonkit.net/portugal)：旧式の右黄帯。2020年以降の型に不在でも除外しない。
+- [英国政府・ナンバーの表示](https://www.gov.uk/displaying-number-plates/rules-number-plates)・[英国政府・道路標識の距離単位](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/330323/ltn-1-94_design-directional-signs.pdf)：前白後黄とmile／yards。
+- [アイルランド](https://www.plonkit.net/ireland)・[キプロス](https://www.plonkit.net/cyprus)・[マルタ](https://www.plonkit.net/malta)：欧州の左側通行、警戒標識、二言語案内、ギリシャ文字、Triq。
+- [スイス](https://www.plonkit.net/switzerland)・[リヒテンシュタイン](https://www.plonkit.net/liechtenstein)：黄色い横断歩道を共有。普通車のナンバーの背景色を比較。
+- [JAF・日本の交通標識](https://english.jaf.or.jp/safe-driving/quiz/motorvehicles)：日本の赤い逆三角形の停止標識。
+- [デンマーク](https://www.plonkit.net/denmark)：赤白の矢印とパイプ枠、街路名 -vej。
+- [ウクライナ](https://www.plonkit.net/ukraine)：青黄の左端と公的表示のウクライナ語。
+
+### 北米・中南米・オセアニア
+
+- [米FHWA・INTERSTATEの盾](https://mutcd.fhwa.dot.gov/htm/2009r1r2/part2/fig2d_03_longdesc.htm)・[アメリカ](https://www.plonkit.net/united-states)・[カナダ](https://www.plonkit.net/canada)：SPEED LIMITとMAXIMUM、km/h、赤青のINTERSTATE表示。
+- [メキシコ](https://www.plonkit.net/mexico)：ALTOは複数国で共有。国道盾のMEXICO表記で締める。
+- [コロンビア](https://www.plonkit.net/colombia)：普通車の黄色いナンバーと標識裏の白い十字の支え。
+- [ブラジル](https://www.plonkit.net/brazil)：南米という文脈にポルトガル語を重ねる。PARE単独は根拠にしない。
+- [ニュージーランド](https://www.plonkit.net/new-zealand)・[オーストラリア](https://www.plonkit.net/australia)：GIVE WAYの赤／黒と路線番号。豪州のルートは両国に絞った後の比較。
+
+### アジア・撮影車
+
+- [韓国](https://www.plonkit.net/south-korea)・[カンボジア](https://www.plonkit.net/cambodia)：公的表示の文字体系と右側通行。
+- [タイ](https://www.plonkit.net/thailand)・[ラオス](https://www.plonkit.net/laos)：似た文字を左右通行・普通車のナンバーで分ける。タイの商用車の黄色を混ぜない。
+- [インドネシア](https://www.plonkit.net/indonesia)：現地住所のKabupaten／Kab.と県名。
+- [ガーナ](https://www.plonkit.net/ghana)：Gen3撮影車の前棒右端の黒テープ。別の撮影世代では不在でも除外しない。
+- [ケニア](https://www.plonkit.net/kenya)・[モンゴル](https://www.plonkit.net/mongolia)：シュノーケルを共有する撮影車があるため、通行方向などを足す。
+
+「国まで」は掲載条件がそろった場合の実用的な結論です。外国車の登録国を撮影国と同一視せず、実測の根拠のない正答確率や出題率は表示しません。全カスタムマップ・全撮影地点・国境の精密な判断を保証する教材ではありません。

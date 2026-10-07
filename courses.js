@@ -1,4 +1,4 @@
-import {QUESTIONS} from './data.js?v=20261007-1';
+import {QUESTIONS} from './data.js?v=20261007-3';
 
 // An editorial starting set: visible scripts, distinctive spelling, and two
 // stop-sign cues with an explicit context. Not a statistical confidence rank.

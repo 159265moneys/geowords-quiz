@@ -1,9 +1,13 @@
-import {LANGUAGES,QUESTIONS} from './data.js?v=20261007-1';
+import {LANGUAGES,QUESTIONS} from './data.js?v=20261007-3';
 
 export function shuffle(items,random=Math.random){
   const result=[...items];
   for(let i=result.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}
   return result;
+}
+
+export function makeCountryChoices(question,random=Math.random){
+  return shuffle([question.country,...question.distractors],random);
 }
 
 export function makeChoices(question,random=Math.random){
@@ -45,7 +49,7 @@ export function createSession(count=QUESTIONS.length,questions=QUESTIONS,random=
 export function answerQuestion(session,language){
   if(session.done||session.answers.length>session.index||!session.choices.includes(language))return false;
   const question=session.deck[session.index];
-  session.answers.push({id:question.id,selected:language,correct:language===(session.mode==='meaning'?question.meaning:question.language)});
+  session.answers.push({id:question.id,selected:language,correct:language===(session.mode==='country'?question.country:session.mode==='meaning'?question.meaning:question.language)});
   return true;
 }
 
